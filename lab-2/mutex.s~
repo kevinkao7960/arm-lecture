@@ -10,13 +10,13 @@
 lock_mutex:
         @ INSERT CODE BELOW
 	ldr r2, =locked
-L1:
+lock_loop:
 	ldrex r1, [r0]
 	cmp r1, #locked
-	beq L1
+	beq lock_loop
 	strex r1, r2, [r0]
 	cmp r1, #success
-	bne L1
+	bne lock_loop
         @ END CODE INSERT
 	bx lr
 
