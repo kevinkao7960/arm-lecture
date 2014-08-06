@@ -8,12 +8,14 @@
 	.type lock_mutex, function
 lock_mutex:
         @ INSERT CODE BELOW
+
 	ldr r2, =locked
 L1:
 	ldrex r1, [r0]
 	cmp r1, #locked
 	beq L1
 	strex r1, r2, [r0]
+
         @ END CODE INSERT
 	bx lr
 
