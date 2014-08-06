@@ -4,6 +4,7 @@
 
 	.equ locked, 1
 	.equ unlocked, 0
+	.equ success, 0
 	.global lock_mutex
 	.type lock_mutex, function
 lock_mutex:
@@ -14,6 +15,8 @@ L1:
 	cmp r1, #locked
 	beq L1
 	strex r1, r2, [r0]
+	@cmp r1, #success
+	@bne L1
         @ END CODE INSERT
 	bx lr
 
